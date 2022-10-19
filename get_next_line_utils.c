@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student1337.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:49:10 by yaidriss          #+#    #+#             */
-/*   Updated: 2022/10/19 12:05:57 by yaidriss         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:18:58 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ char	*my_ft_strjoin(char *s1, char *s2, int calloc)
 
 	i = 0;
 	j = 0;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
 	result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!result)
 		return (NULL);
-	while (s1[j])
+	while (s1 && s1[j])
 		result[i++] = s1[j++];
 	j = 0;
-	while (s2[j])
+	while (s2 && s2[j])
 		result[i++] = s2[j++];
 	result[i] = 0;
 	if (calloc)
@@ -66,6 +66,8 @@ char	*my_ft_strchr(const char	*s)
 	char	*s1;
 	int		n;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	s1 = (char *)s;
 	n = ft_strlen(s1);
@@ -84,6 +86,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if(!s)
+		return 0;
 	i = 0;
 	while (s[i])
 		i++;
@@ -125,9 +129,8 @@ char	*my_ft_substr(char *s, unsigned int start,\
 t_get	handl_sheet(t_get line,char *buffer)
 {
 	line.index = (int)(my_ft_strchr(line.data) - line.data);
-	line.part = my_ft_substr(line.data,0,line.index, 0);
+	line.part = my_ft_substr(line.data,0,line.index + 1, 0);
 	line.next = my_ft_substr(line.data, line.index + 1, ft_strlen(line.data) - line.index, 1);
-	line.line = my_ft_strjoin(buffer, line.part, 1);
-	buffer = line.next;
+	line.line = my_ft_strjoin(buffer, line.part, 0);
 	return (line);
 }

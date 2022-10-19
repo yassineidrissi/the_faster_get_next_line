@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaidriss <yaidriss@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: yaidriss <yaidriss@student1337.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:57:22 by yaidriss          #+#    #+#             */
-/*   Updated: 2022/10/19 12:12:48 by yaidriss         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:14:57 by yaidriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ typedef struct l_get
 	char	*line;
 	char	*next;
 	char	*part;
+	int 	end;
 }t_get;
 
-# define BUFFER_SIZE 10
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 70
+#endif
 
 char	*get_next_line(int fd);
 char	*my_ft_strjoin(char *s1, char *s2, int calloc);
@@ -39,9 +42,8 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t	count, size_t size);
 char	*my_ft_strchr(const char	*s);
 size_t	ft_strlen(const char *s);
-char	*my_read(int fd, char *buffer, int a);
 t_get	handl_sheet(t_get line, char *buffer);
-char	*my_read(int fd, char *buffer, int a);
+t_get	my_read(int fd, char *buffer, int a);
 char	*my_ft_substr(char *s, unsigned int start, \
 	size_t len, int alloc);
 
